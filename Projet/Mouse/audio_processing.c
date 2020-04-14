@@ -7,7 +7,7 @@
 #include <motors.h>
 #include <audio/microphone.h>
 #include <audio_processing.h>
-#include <communication.h>
+#include <communications.h>
 #include <fft.h>
 #include <arm_math.h>
 
@@ -43,7 +43,7 @@ static float micBack_output[FFT_SIZE];
 #define FREQ_BACKWARD_L		(FREQ_BACKWARD-1)
 #define FREQ_BACKWARD_H		(FREQ_BACKWARD+1)
 
-//#define SEND_FROM_MIC
+#define SEND_FROM_MIC
 
 /*
 *	Simple function used to detect the highest value in a buffer
@@ -252,37 +252,9 @@ void sound_check(void){
             *   End of optimized FFT
             */
 
-            /*
-            *   Non optimized FFT
-            */
-
-            // //need to convert the float buffer into complex_float struct array
-            // for(uint16_t i = 0 ; i < (2*FFT_SIZE) ; i+=2){
-            //     temp_tab[i/2].real = bufferCmplxInput[i];
-            //     temp_tab[i/2].imag = bufferCmplxInput[i+1];
-            // }
-
-            // chSysLock();
-            // //reset the timer counter
-            // GPTD12.tim->CNT = 0;
-
-            // //do a non optimized FFT
-            // doFFT_c(FFT_SIZE, temp_tab);
-
-            // time_fft = GPTD12.tim->CNT;
-            // chSysUnlock();
-
-            // //reconverts the result into a float buffer
-            // for(uint16_t i = 0 ; i < (2*FFT_SIZE) ; i+=2){
-            //     bufferCmplxInput[i] = temp_tab[i/2].real;
-            //     bufferCmplxInput[i+1] = temp_tab[i/2].imag;
-            // }
-
-            /*
-            *   End of non optimized FFT
-            */
-
             arm_cmplx_mag_f32(bufferCmplxInput, bufferOutput, FFT_SIZE);
+
+            processAudioData();
 
             SendFloatToComputer((BaseSequentialStream *) &SD3, bufferOutput, FFT_SIZE);
             //chprintf((BaseSequentialStream *) &SDU1, "time fft = %d us, time magnitude = %d us\n",time_fft, time_mag);

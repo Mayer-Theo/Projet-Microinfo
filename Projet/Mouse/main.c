@@ -44,6 +44,7 @@
 #include "IR_sensors.h"
 #include "audio_processing.h"
 #include "fft.h"
+#include "tof.h"
 
 #define SHELL_WA_SIZE   THD_WORKING_AREA_SIZE(2048)
 
@@ -53,7 +54,7 @@ CONDVAR_DECL(bus_condvar);
 
 //parameter_namespace_t parameter_root, aseba_ns;
 
-/*static bool load_config(void)
+static bool load_config(void)
 {
     extern uint32_t _config_start;
 
@@ -71,7 +72,7 @@ static void serial_start(void)
 
 	sdStart(&SD3, &ser_cfg); // UART3.
 }
-*/
+
 int main(void)
 {
 
@@ -94,7 +95,7 @@ int main(void)
 	motors_init();
 	proximity_start();
 //	battery_level_start();
-	dac_start();
+//	dac_start();
 //	exti_start();
 	imu_start();
 	ir_remote_start();
@@ -106,8 +107,9 @@ int main(void)
 //	playMelodyStart();
 //	playSoundFileStart();
 
-    proximity_check();
+    //proximity_check();
     //sound_check();
+	tof_scan();
 
     /* Infinite loop. */
     while (1) {

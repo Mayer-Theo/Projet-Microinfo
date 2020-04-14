@@ -1,4 +1,4 @@
-build/obj/IR_sensors.o: IR_sensors.c \
+build/obj/tof.o: tof.c \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\stdio.h \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\_ansi.h \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\newlib.h \
@@ -73,6 +73,7 @@ build/obj/IR_sensors.o: IR_sensors.c \
  ../../lib/e-puck2_main-processor/ChibiOS//os/rt/include/chdynamic.h \
  ../../lib/e-puck2_main-processor/ChibiOS//os/rt/include/chqueues.h \
  ../../lib/e-puck2_main-processor/ChibiOS//os/rt/include/chstreams.h \
+ ../../lib/e-puck2_main-processor/ChibiOS//os/hal/lib/streams/chprintf.h \
  ../../lib/e-puck2_main-processor/ChibiOS//os/hal/include/hal.h \
  ../../lib/e-puck2_main-processor/ChibiOS//os/hal/osal/rt/osal.h \
  ../../lib/e-puck2_main-processor/src/halconf.h \
@@ -128,8 +129,7 @@ build/obj/IR_sensors.o: IR_sensors.c \
  ../../lib/e-puck2_main-processor/ChibiOS_ext/os/hal/ports/STM32/STM32F4xx/stm32_registry.h \
  ../../lib/e-puck2_main-processor/ChibiOS//os/hal/include/mmc_spi.h \
  ../../lib/e-puck2_main-processor/ChibiOS//os/hal/include/serial_usb.h \
- IR_sensors.h main.h \
- ../../lib/e-puck2_main-processor/src/camera/dcmi_camera.h \
+ tof.h main.h ../../lib/e-puck2_main-processor/src/camera/dcmi_camera.h \
  ../../lib/e-puck2_main-processor/ChibiOS_ext/os/hal/include/dcmi.h \
  ../../lib/e-puck2_main-processor/ChibiOS_ext/os/hal/include/../ports/STM32/STM32F4xx/dcmi_lld.h \
  ../../lib/e-puck2_main-processor/ChibiOS_ext/os/hal/include/../ports/STM32/STM32F4xx/stm32_registry.h \
@@ -142,7 +142,16 @@ build/obj/IR_sensors.o: IR_sensors.c \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\stdlib.h \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\stdlib.h \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\alloca.h \
- ../../lib/e-puck2_main-processor/src/sensors/proximity.h \
+ ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/VL53L0X.h \
+ ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/vl53l0x_api.h \
+ ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/vl53l0x_api_strings.h \
+ ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/vl53l0x_def.h \
+ ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/vl53l0x_device.h \
+ ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/vl53l0x_types.h \
+ ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/../../platform/inc/vl53l0x_platform.h \
+ f:\documents\github\projet-microinfo\lib\e-puck2_main-processor\src\sensors\vl53l0x\api\core\inc\vl53l0x_def.h \
+ ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/../../platform/inc/vl53l0x_platform_log.h \
+ ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/../../platform/inc/vl53l0x_i2c_platform.h \
  ../../lib/e-puck2_main-processor/src/motors.h
 
 d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\stdio.h:
@@ -293,6 +302,8 @@ d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-non
 
 ../../lib/e-puck2_main-processor/ChibiOS//os/rt/include/chstreams.h:
 
+../../lib/e-puck2_main-processor/ChibiOS//os/hal/lib/streams/chprintf.h:
+
 ../../lib/e-puck2_main-processor/ChibiOS//os/hal/include/hal.h:
 
 ../../lib/e-puck2_main-processor/ChibiOS//os/hal/osal/rt/osal.h:
@@ -403,7 +414,7 @@ d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-non
 
 ../../lib/e-puck2_main-processor/ChibiOS//os/hal/include/serial_usb.h:
 
-IR_sensors.h:
+tof.h:
 
 main.h:
 
@@ -433,6 +444,24 @@ d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-non
 
 d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\alloca.h:
 
-../../lib/e-puck2_main-processor/src/sensors/proximity.h:
+../../lib/e-puck2_main-processor/src/sensors/VL53L0X/VL53L0X.h:
+
+../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/vl53l0x_api.h:
+
+../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/vl53l0x_api_strings.h:
+
+../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/vl53l0x_def.h:
+
+../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/vl53l0x_device.h:
+
+../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/vl53l0x_types.h:
+
+../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/../../platform/inc/vl53l0x_platform.h:
+
+f:\documents\github\projet-microinfo\lib\e-puck2_main-processor\src\sensors\vl53l0x\api\core\inc\vl53l0x_def.h:
+
+../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/../../platform/inc/vl53l0x_platform_log.h:
+
+../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/../../platform/inc/vl53l0x_i2c_platform.h:
 
 ../../lib/e-puck2_main-processor/src/motors.h:

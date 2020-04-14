@@ -140,9 +140,7 @@ build/obj/audio_processing.o: audio_processing.c \
  ../../lib/e-puck2_main-processor/src/motors.h \
  ../../lib/e-puck2_main-processor/src/audio/microphone.h \
  ../../lib/e-puck2_main-processor/src/audio/mp45dt02_processing.h \
- audio_processing.h ../../lib/e-puck2_main-processor/src/communication.h \
- ../../lib/e-puck2_main-processor/src/cmp_mem_access/cmp_mem_access.h \
- ../../lib/e-puck2_main-processor/src/cmp/cmp.h fft.h \
+ audio_processing.h communications.h fft.h \
  ../../lib/e-puck2_main-processor/ChibiOS//os/ext/CMSIS/include/arm_math.h \
  ../../lib/e-puck2_main-processor/ChibiOS//os/ext/CMSIS/include/core_cm4.h \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\string.h \
@@ -437,11 +435,7 @@ d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-non
 
 audio_processing.h:
 
-../../lib/e-puck2_main-processor/src/communication.h:
-
-../../lib/e-puck2_main-processor/src/cmp_mem_access/cmp_mem_access.h:
-
-../../lib/e-puck2_main-processor/src/cmp/cmp.h:
+communications.h:
 
 fft.h:
 

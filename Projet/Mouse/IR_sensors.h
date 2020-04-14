@@ -9,7 +9,6 @@ extern "C" {
 
 void proximity_check(void);
 
-
 #ifdef __cplusplus
 }
 #endif

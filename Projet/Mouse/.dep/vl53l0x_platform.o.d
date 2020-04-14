@@ -46,7 +46,7 @@ build/obj/vl53l0x_platform.o: \
  ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/platform/src/../../core/inc/vl53l0x_api.h \
  ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/platform/src/../../core/inc/vl53l0x_api_strings.h \
  ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/platform/src/../../core/inc/vl53l0x_def.h \
- ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/platform/src/../../core/inc/../../platform/inc/vl53l0x_platform.h
+ f:\documents\github\projet-microinfo\lib\e-puck2_main-processor\src\sensors\vl53l0x\api\platform\inc\vl53l0x_platform.h
 
 ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/platform/src/../inc/vl53l0x_platform.h:
 
@@ -140,4 +140,4 @@ d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-non
 
 ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/platform/src/../../core/inc/vl53l0x_def.h:
 
-../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/platform/src/../../core/inc/../../platform/inc/vl53l0x_platform.h:
+f:\documents\github\projet-microinfo\lib\e-puck2_main-processor\src\sensors\vl53l0x\api\platform\inc\vl53l0x_platform.h:

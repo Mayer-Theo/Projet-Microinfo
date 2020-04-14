@@ -20,7 +20,7 @@ build/obj/can-buffer.o: \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\stdlib.h \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\alloca.h \
  ../../lib/e-puck2_main-processor/aseba/transport/can/../buffer/../../vm/vm.h \
- ../../lib/e-puck2_main-processor/aseba/transport/can/../buffer/../../vm/../common/types.h \
+ f:\documents\github\projet-microinfo\lib\e-puck2_main-processor\aseba\common\types.h \
  ../../lib/e-puck2_main-processor/aseba/transport/can/../buffer/../../vm/natives.h \
  ../../lib/e-puck2_main-processor/aseba/transport/can/../buffer/../../vm/vm.h \
  ../../lib/e-puck2_main-processor/aseba/transport/can/can-net.h \
@@ -67,7 +67,7 @@ d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-non
 
 ../../lib/e-puck2_main-processor/aseba/transport/can/../buffer/../../vm/vm.h:
 
-../../lib/e-puck2_main-processor/aseba/transport/can/../buffer/../../vm/../common/types.h:
+f:\documents\github\projet-microinfo\lib\e-puck2_main-processor\aseba\common\types.h:
 
 ../../lib/e-puck2_main-processor/aseba/transport/can/../buffer/../../vm/natives.h:
 
