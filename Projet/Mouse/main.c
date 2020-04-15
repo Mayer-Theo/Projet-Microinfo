@@ -107,7 +107,7 @@ int main(void)
 //	playMelodyStart();
 //	playSoundFileStart();
 
-    //proximity_check();
+    proximity_check();
     //sound_check();
 	tof_scan();
 

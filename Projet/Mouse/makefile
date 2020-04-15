@@ -9,7 +9,7 @@ PROJECT = Mouse
 GLOBAL_PATH = ../../lib/e-puck2_main-processor
 
 #Source files to include
-CSRC += ./main.c ./audio_processing.c ./IR_sensors.c ./fft.c ./communications.c ./tof.c \
+CSRC += ./main.c ./audio_processing.c ./IR_sensors.c ./fft.c ./communications.c ./tof.c ./control.c \
 
 
 #Header folders to include

@@ -9,6 +9,8 @@ extern "C" {
 
 void proximity_check(void);
 
+void junction_scan(void);
+
 #ifdef __cplusplus
 }
 #endif

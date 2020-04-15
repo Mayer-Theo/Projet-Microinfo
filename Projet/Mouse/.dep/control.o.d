@@ -1,4 +1,4 @@
-build/obj/IR_sensors.o: IR_sensors.c \
+build/obj/control.o: control.c \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\stdio.h \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\_ansi.h \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\newlib.h \
@@ -144,7 +144,7 @@ build/obj/IR_sensors.o: IR_sensors.c \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\stdlib.h \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\alloca.h \
  ../../lib/e-puck2_main-processor/src/sensors/proximity.h \
- ../../lib/e-puck2_main-processor/src/motors.h control.h
+ ../../lib/e-puck2_main-processor/src/motors.h
 
 d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\stdio.h:
 
@@ -439,5 +439,3 @@ d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-non
 ../../lib/e-puck2_main-processor/src/sensors/proximity.h:
 
 ../../lib/e-puck2_main-processor/src/motors.h:
-
-control.h:

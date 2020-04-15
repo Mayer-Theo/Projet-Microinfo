@@ -10,7 +10,6 @@
 
 #define WALL_STOP_DIST 		80
 #define SPEED_0				0
-#define CRUISING_SPEED		500
 
 //valeurs obtenue par expérience pour fonctionnement du tof
 #define ABERRATION_CONTROL	470
@@ -25,18 +24,15 @@ static THD_FUNCTION(tof_sensor, arg){
 	static uint16_t wall_distance=0;
 	static uint16_t temp_wall_distance=0;
 
-	left_motor_set_speed(CRUISING_SPEED);
-	right_motor_set_speed(CRUISING_SPEED);
+	systime_t time;
 
 	while(wall_distance<MIN_TOF_VALUE || wall_distance>MAX_TOF_VALUE){
 		wall_distance=VL53L0X_get_dist_mm();
+		chThdSleepUntilWindowed(time, time + MS2ST(100));
 	}
 
 	while(1){
 		temp_wall_distance=VL53L0X_get_dist_mm();
-
-		chprintf((BaseSequentialStream *)&SD3, "check 1\r\n");
-		chprintf((BaseSequentialStream *)&SD3, "%d-%d\r\n\n", wall_distance, temp_wall_distance);
 
 		if(abs(temp_wall_distance-wall_distance)<ABERRATION_CONTROL && temp_wall_distance>MIN_TOF_VALUE && temp_wall_distance<MAX_TOF_VALUE){
 			wall_distance=temp_wall_distance;
@@ -46,10 +42,8 @@ static THD_FUNCTION(tof_sensor, arg){
 			left_motor_set_speed(SPEED_0);
 			right_motor_set_speed(SPEED_0);
 		}
-		else{
-			left_motor_set_speed(CRUISING_SPEED);
-			right_motor_set_speed(CRUISING_SPEED);
-		}
+
+		chThdSleepUntilWindowed(time, time + MS2ST(100));
 	}
 }
 
