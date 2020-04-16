@@ -50,12 +50,11 @@ void proximity_check(void){
 }
 
 void junction_scan(void){
-	proximity_msg_t prox_values;
 	unsigned int left=0;
 	unsigned int right=0;
 
-	left=prox_values.delta[5];
-	right=prox_values.delta[2];
+	left=get_calibrated_prox(5);
+	right=get_calibrated_prox(2);
 
 	if(left<WALL_THRESHOLD && right<WALL_THRESHOLD){
 		user_direction_input();

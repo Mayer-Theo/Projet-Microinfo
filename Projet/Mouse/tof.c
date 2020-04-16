@@ -7,6 +7,7 @@
 #include <main.h>
 #include "sensors/VL53L0X/VL53L0X.h"
 #include "motors.h"
+#include "IR_sensors.h"
 
 #define WALL_STOP_DIST 		80
 #define SPEED_0				0
@@ -20,6 +21,8 @@ static THD_WORKING_AREA(tof_sensor_wa, 2048);
 static THD_FUNCTION(tof_sensor, arg){
 	(void) arg;
 	chRegSetThreadName(__FUNCTION__);
+
+	msg_t msg=0; //TODO check if used correctly to end thread
 
 	static uint16_t wall_distance=0;
 	static uint16_t temp_wall_distance=0;
@@ -41,6 +44,9 @@ static THD_FUNCTION(tof_sensor, arg){
 		if(wall_distance<WALL_STOP_DIST){
 			left_motor_set_speed(SPEED_0);
 			right_motor_set_speed(SPEED_0);
+
+			junction_scan();
+			chThdExit(msg);		//TODO mise en pause de la thread plutôt? Ou variable globale de contrôle? différence avec chThdExits? Que doit contenir msg ?=====================================================================================================
 		}
 
 		chThdSleepUntilWindowed(time, time + MS2ST(100));

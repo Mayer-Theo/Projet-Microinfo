@@ -15,6 +15,8 @@ void turn_left(void);
 
 void dead_end(void);
 
+void turn(float position, int sense);
+
 #ifdef __cplusplus
 }
 #endif
