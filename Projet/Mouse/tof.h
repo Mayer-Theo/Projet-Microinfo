@@ -7,7 +7,9 @@ extern "C" {
 
 #include <stdint.h>
 
-void tof_scan(void);
+void init_tof_thread(void);
+
+bool tof_wall_too_close(void);
 
 #ifdef __cplusplus
 }

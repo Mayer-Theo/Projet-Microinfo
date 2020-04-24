@@ -155,6 +155,7 @@ build/obj/skel_user.o: \
  ../../lib/e-puck2_main-processor/src/msgbus/messagebus.h \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\unistd.h \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\unistd.h \
+ ../../lib/e-puck2_main-processor/src/sensors/proximity.h \
  ../../lib/e-puck2_main-processor/src/config_flash_storage.h \
  ../../lib/e-puck2_main-processor/src/parameter/parameter.h
 
@@ -469,6 +470,8 @@ main.h:
 d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\unistd.h:
 
 d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\unistd.h:
+
+../../lib/e-puck2_main-processor/src/sensors/proximity.h:
 
 ../../lib/e-puck2_main-processor/src/config_flash_storage.h:
 

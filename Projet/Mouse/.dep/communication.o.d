@@ -161,7 +161,8 @@ build/obj/communication.o: \
  ../../lib/e-puck2_main-processor/ChibiOS_ext/os/hal/include/../ports/STM32/STM32F4xx/stm32_rcc.h \
  ../../lib/e-puck2_main-processor/src/camera/po8030.h \
  ../../lib/e-puck2_main-processor/src/msgbus/messagebus.h \
- ../../lib/e-puck2_main-processor/src/parameter/parameter.h
+ ../../lib/e-puck2_main-processor/src/parameter/parameter.h \
+ ../../lib/e-puck2_main-processor/src/sensors/proximity.h
 
 ../../lib/e-puck2_main-processor/ChibiOS//os/hal/include/hal.h:
 
@@ -488,3 +489,5 @@ main.h:
 ../../lib/e-puck2_main-processor/src/msgbus/messagebus.h:
 
 ../../lib/e-puck2_main-processor/src/parameter/parameter.h:
+
+../../lib/e-puck2_main-processor/src/sensors/proximity.h:
