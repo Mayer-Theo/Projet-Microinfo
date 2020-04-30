@@ -7,9 +7,11 @@ extern "C" {
 
 #include <stdint.h>
 
-void proximity_check(void);
+void init_IR_thread(void);
 
 void junction_scan(void);
+
+void change_speed(void);
 
 #ifdef __cplusplus
 }

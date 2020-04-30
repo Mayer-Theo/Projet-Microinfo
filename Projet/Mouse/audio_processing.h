@@ -17,6 +17,13 @@ typedef enum {
 	BACK_OUTPUT
 } BUFFER_NAME_t;
 
+typedef enum{
+	WAIT_COMMAND = 0,
+	COMMAND_PAUSE,
+	COMMAND_PLAY,
+	COMMAND_TURN_LEFT,
+	COMMAND_TURN_RIGHT,
+} Commandstate;
 
 void processAudioData(int16_t *data, uint16_t num_samples);
 
@@ -30,6 +37,6 @@ void wait_send_to_computer(void);
 */
 float* get_audio_buffer_ptr(BUFFER_NAME_t name);
 
-void sound_check(void);
+void init_sound_thread(void);
 
 #endif /* AUDIO_PROCESSING_H */

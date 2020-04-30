@@ -11,6 +11,9 @@
 #include <fft.h>
 #include <arm_math.h>
 
+#include "control.h"
+#include "IR_sensors.h"
+
 //semaphore
 static BSEMAPHORE_DECL(sendToComputer_sem, TRUE);
 
@@ -25,25 +28,40 @@ static float micRight_output[FFT_SIZE];
 static float micFront_output[FFT_SIZE];
 static float micBack_output[FFT_SIZE];
 
-#define MIN_VALUE_THRESHOLD	10000 
+#define MIN_VALUE_THRESHOLD	35000
 
-#define MIN_FREQ		10	//we don't analyze before this index to not use resources for nothing
-#define FREQ_FORWARD	16	//250Hz
-#define FREQ_LEFT		19	//296Hz
-#define FREQ_RIGHT		23	//359HZ
-#define FREQ_BACKWARD	26	//406Hz
-#define MAX_FREQ		30	//we don't analyze after this index to not use resources for nothing
+#define MIN_FREQ			10	//we don't analyze before this index to not use resources for nothing
+#define FREQ_PAUSE		16	//250Hz
+#define FREQ_LEFT			19	//296Hz
+#define FREQ_RIGHT			23	//359HZ
+#define FREQ_PLAY	26	//406Hz
+#define MAX_FREQ			30	//we don't analyze after this index to not use resources for nothing
 
-#define FREQ_FORWARD_L		(FREQ_FORWARD-1)
-#define FREQ_FORWARD_H		(FREQ_FORWARD+1)
+#define FREQ_PAUSE_L	(FREQ_PAUSE-1)
+#define FREQ_PAUSE_H	(FREQ_PAUSE+1)
 #define FREQ_LEFT_L			(FREQ_LEFT-1)
 #define FREQ_LEFT_H			(FREQ_LEFT+1)
 #define FREQ_RIGHT_L		(FREQ_RIGHT-1)
 #define FREQ_RIGHT_H		(FREQ_RIGHT+1)
-#define FREQ_BACKWARD_L		(FREQ_BACKWARD-1)
-#define FREQ_BACKWARD_H		(FREQ_BACKWARD+1)
+#define FREQ_PLAY_L	(FREQ_PLAY-1)
+#define FREQ_PLAY_H	(FREQ_PLAY+1)
 
 #define SEND_FROM_MIC
+
+static Commandstate status=WAIT_COMMAND;
+
+static THD_WORKING_AREA(listening_wa, 2048);
+static THD_FUNCTION(listening, arg){
+	(void) arg;
+	chRegSetThreadName(__FUNCTION__);
+
+	systime_t time;
+
+	while(1){
+		mic_start(&processAudioData);
+	}
+
+}
 
 /*
 *	Simple function used to detect the highest value in a buffer
@@ -51,7 +69,7 @@ static float micBack_output[FFT_SIZE];
 */
 void sound_remote(float* data){
 	float max_norm = MIN_VALUE_THRESHOLD;
-	int16_t max_norm_index = -1; 
+	int16_t max_norm_index = -1;
 
 	//search for the highest peak
 	for(uint16_t i = MIN_FREQ ; i <= MAX_FREQ ; i++){
@@ -61,31 +79,48 @@ void sound_remote(float* data){
 		}
 	}
 
-	//go forward
-	if(max_norm_index >= FREQ_FORWARD_L && max_norm_index <= FREQ_FORWARD_H){
-		left_motor_set_speed(600);
-		right_motor_set_speed(600);
+	switch(status){
+	case WAIT_COMMAND:
+		chprintf((BaseSequentialStream *)&SD3, "wait command\r\n");
+			if(max_norm_index >= FREQ_PAUSE_L && max_norm_index <= FREQ_PAUSE_H){
+				status=COMMAND_PAUSE;
+			}
+			else if(max_norm_index >= FREQ_LEFT_L && max_norm_index <= FREQ_LEFT_H){
+				status=COMMAND_TURN_LEFT;
+			}
+			else if(max_norm_index >= FREQ_RIGHT_L && max_norm_index <= FREQ_RIGHT_H){
+				status=COMMAND_TURN_RIGHT;
+			}
+			else if(max_norm_index >= FREQ_PLAY_L && max_norm_index <= FREQ_PLAY_H){
+				status=COMMAND_PLAY;
+			}
+			break;
+
+	case COMMAND_PAUSE:
+		chprintf((BaseSequentialStream *)&SD3, "command pause\r\n");
+		set_pause();
+		status=WAIT_COMMAND;
+		break;
+
+	case COMMAND_TURN_LEFT:
+		chprintf((BaseSequentialStream *)&SD3, "turn left init\r\n");
+		turn_left();
+		status=WAIT_COMMAND;
+		break;
+
+	case COMMAND_TURN_RIGHT:
+		chprintf((BaseSequentialStream *)&SD3, "turn right init\r\n");
+		turn_right();
+		status=WAIT_COMMAND;
+		break;
+
+	case COMMAND_PLAY:
+		chprintf((BaseSequentialStream *)&SD3, "change speed\r\n");
+		set_play();
+		status=WAIT_COMMAND;
+		break;
 	}
-	//turn left
-	else if(max_norm_index >= FREQ_LEFT_L && max_norm_index <= FREQ_LEFT_H){
-		left_motor_set_speed(-600);
-		right_motor_set_speed(600);
-	}
-	//turn right
-	else if(max_norm_index >= FREQ_RIGHT_L && max_norm_index <= FREQ_RIGHT_H){
-		left_motor_set_speed(600);
-		right_motor_set_speed(-600);
-	}
-	//go backward
-	else if(max_norm_index >= FREQ_BACKWARD_L && max_norm_index <= FREQ_BACKWARD_H){
-		left_motor_set_speed(-600);
-		right_motor_set_speed(-600);
-	}
-	else{
-		left_motor_set_speed(0);
-		right_motor_set_speed(0);
-	}
-	
+
 }
 
 /*
@@ -206,60 +241,6 @@ float* get_audio_buffer_ptr(BUFFER_NAME_t name){
 }
 
 //--------------------------------------------Nos Fonctions----------------------------------//
-void sound_check(void){
-
-    //temp tab used to store values in complex_float format
-    //needed bx doFFT_c
-    static complex_float temp_tab[FFT_SIZE];
-    //send_tab is used to save the state of the buffer to send (double buffering)
-    //to avoid modifications of the buffer while sending it
-    static float send_tab[FFT_SIZE];
-
-#ifdef SEND_FROM_MIC
-    //starts the microphones processing thread.
-    //it calls the callback given in parameter when samples are ready
-    mic_start(&processAudioData);
-#endif  /* SEND_FROM_MIC */
-
-    /* Infinite loop. */
-    while (1) {
-#ifdef SEND_FROM_MIC
-        //waits until a result must be sent to the computer
-        wait_send_to_computer();
-#ifdef DOUBLE_BUFFERING
-        //we copy the buffer to avoid conflicts
-        arm_copy_f32(get_audio_buffer_ptr(LEFT_OUTPUT), send_tab, FFT_SIZE);
-        SendFloatToComputer((BaseSequentialStream *) &SD3, send_tab, FFT_SIZE);
-#else
-        SendFloatToComputer((BaseSequentialStream *) &SD3, get_audio_buffer_ptr(LEFT_OUTPUT), FFT_SIZE);
-#endif  /* DOUBLE_BUFFERING */
-#else
-
-        float* bufferCmplxInput = get_audio_buffer_ptr(LEFT_CMPLX_INPUT);
-        float* bufferOutput = get_audio_buffer_ptr(LEFT_OUTPUT);
-
-        uint16_t size = ReceiveInt16FromComputer((BaseSequentialStream *) &SD3, bufferCmplxInput, FFT_SIZE);
-
-        if(size == FFT_SIZE){
-            /*
-            *   Optimized FFT
-            */
-
-            doFFT_optimized(FFT_SIZE, bufferCmplxInput);
-
-
-            /*
-            *   End of optimized FFT
-            */
-
-            arm_cmplx_mag_f32(bufferCmplxInput, bufferOutput, FFT_SIZE);
-
-            processAudioData();
-
-            SendFloatToComputer((BaseSequentialStream *) &SD3, bufferOutput, FFT_SIZE);
-            //chprintf((BaseSequentialStream *) &SDU1, "time fft = %d us, time magnitude = %d us\n",time_fft, time_mag);
-
-        }
-#endif  /* SEND_FROM_MIC */
-    }
+void init_sound_thread(void){
+	chThdCreateStatic(listening_wa, sizeof(listening_wa), NORMALPRIO, listening, NULL);
 }
