@@ -29,7 +29,7 @@ static bool pause_flag=FALSE;
 void init_threads(void){
 	init_IR_thread();		//lance thread des capteurs IR
 	init_tof_thread();	//lance thread du tof
-    init_sound_thread();	//lance thread d'analyse du son
+    //init_sound_thread();	//lance thread d'analyse du son
 }
 
 void turn(float position, int sense){

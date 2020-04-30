@@ -28,7 +28,7 @@ static float micRight_output[FFT_SIZE];
 static float micFront_output[FFT_SIZE];
 static float micBack_output[FFT_SIZE];
 
-#define MIN_VALUE_THRESHOLD	10000
+#define MIN_VALUE_THRESHOLD	35000
 
 #define MIN_FREQ			10	//we don't analyze before this index to not use resources for nothing
 #define FREQ_PAUSE		16	//250Hz
@@ -99,73 +99,25 @@ void sound_remote(float* data){
 	case COMMAND_PAUSE:
 		chprintf((BaseSequentialStream *)&SD3, "command pause\r\n");
 		set_pause();
-		status=COMMAND_PAUSE_WAIT;
-		break;
-
-	case COMMAND_PAUSE_WAIT:
-		if(max_norm_index >= FREQ_LEFT_L && max_norm_index <= FREQ_LEFT_H){
-			status=COMMAND_TURN_LEFT;
-		}
-		else if(max_norm_index >= FREQ_RIGHT_L && max_norm_index <= FREQ_RIGHT_H){
-			status=COMMAND_TURN_RIGHT;
-		}
-		else if(max_norm_index >= FREQ_PLAY_L && max_norm_index <= FREQ_PLAY_H){
-			status=COMMAND_PLAY;
-		}
+		status=WAIT_COMMAND;
 		break;
 
 	case COMMAND_TURN_LEFT:
 		chprintf((BaseSequentialStream *)&SD3, "turn left init\r\n");
 		turn_left();
-		status=COMMAND_TURN_LEFT_WAIT;
-		break;
-
-	case COMMAND_TURN_LEFT_WAIT:
-		if(max_norm_index >= FREQ_PAUSE_L && max_norm_index <= FREQ_PAUSE_H){
-			status=COMMAND_PAUSE;
-		}
-		else if(max_norm_index >= FREQ_RIGHT_L && max_norm_index <= FREQ_RIGHT_H){
-			status=COMMAND_TURN_RIGHT;
-		}
-		else if(max_norm_index >= FREQ_PLAY_L && max_norm_index <= FREQ_PLAY_H){
-			status=COMMAND_PLAY;
-		}
+		status=WAIT_COMMAND;
 		break;
 
 	case COMMAND_TURN_RIGHT:
 		chprintf((BaseSequentialStream *)&SD3, "turn right init\r\n");
 		turn_right();
-		status=COMMAND_TURN_RIGHT_WAIT;
-		break;
-
-	case COMMAND_TURN_RIGHT_WAIT:
-		if(max_norm_index >= FREQ_PAUSE_L && max_norm_index <= FREQ_PAUSE_H){
-			status=COMMAND_PAUSE;
-		}
-		else if(max_norm_index >= FREQ_LEFT_L && max_norm_index <= FREQ_LEFT_H){
-			status=COMMAND_TURN_LEFT;
-		}
-		else if(max_norm_index >= FREQ_PLAY_L && max_norm_index <= FREQ_PLAY_H){
-			status=COMMAND_PLAY;
-		}
+		status=WAIT_COMMAND;
 		break;
 
 	case COMMAND_PLAY:
 		chprintf((BaseSequentialStream *)&SD3, "change speed\r\n");
 		set_play();
-		status=COMMAND_PLAY_WAIT;
-		break;
-
-	case COMMAND_PLAY_WAIT:
-		if(max_norm_index >= FREQ_PAUSE_L && max_norm_index <= FREQ_PAUSE_H){
-			status=COMMAND_PAUSE;
-		}
-		else if(max_norm_index >= FREQ_LEFT_L && max_norm_index <= FREQ_LEFT_H){
-			status=COMMAND_TURN_LEFT;
-		}
-		else if(max_norm_index >= FREQ_RIGHT_L && max_norm_index <= FREQ_RIGHT_H){
-			status=COMMAND_TURN_RIGHT;
-		}
+		status=WAIT_COMMAND;
 		break;
 	}
 

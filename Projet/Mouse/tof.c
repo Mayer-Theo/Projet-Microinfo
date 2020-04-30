@@ -27,8 +27,6 @@ static THD_FUNCTION(tof_sensor, arg){
 	(void) arg;
 	chRegSetThreadName(__FUNCTION__);
 
-	msg_t msg=0; //TODO check if used correctly to end thread
-
 	static uint16_t wall_distance=0;
 	static uint16_t temp_wall_distance=0;
 
@@ -39,32 +37,29 @@ static THD_FUNCTION(tof_sensor, arg){
 
 		wall_close=FALSE;
 
-		if(pause_state()==FALSE){
-			//lancement du contrôle de distance uniquement dans une plage de valeurs
-			if(wall_distance>MIN_TOF_VALUE && wall_distance<MAX_TOF_VALUE){
-				right_motor_set_speed(speed2);
-				left_motor_set_speed(speed2);
+		//lancement du contrôle de distance uniquement dans une plage de valeurs et pas en pause
+		if(pause_state()==FALSE && wall_distance>MIN_TOF_VALUE && wall_distance<MAX_TOF_VALUE){
+			right_motor_set_speed(speed2);
+			left_motor_set_speed(speed2);
 
-				wall_close=TRUE;
+			wall_close=TRUE;
 
-				temp_wall_distance=VL53L0X_get_dist_mm();
+			temp_wall_distance=VL53L0X_get_dist_mm();
 
-					//ignorer les valeurs aberrantes (beaucoups plus petite/grande que la valeur précédente)
-					if(abs(temp_wall_distance-wall_distance)<ABERRATION_CONTROL && temp_wall_distance>MIN_TOF_VALUE && temp_wall_distance<MAX_TOF_VALUE){
-						wall_distance=temp_wall_distance;
-					}
+				//ignorer les valeurs aberrantes (beaucoups plus petite/grande que la valeur précédente)
+				if(abs(temp_wall_distance-wall_distance)<ABERRATION_CONTROL && temp_wall_distance>MIN_TOF_VALUE && temp_wall_distance<MAX_TOF_VALUE){
+					wall_distance=temp_wall_distance;
+				}
 
-					//arreter le robot s'il est plus proche que WALL_STOP_DIST d'un mur
-					if(wall_distance<WALL_STOP_DIST){
-						left_motor_set_speed(SPEED_0);
-						right_motor_set_speed(SPEED_0);
-						junction_scan();
-						//chThdExit(msg);		//TODO mise en pause de la thread plutôt? Ou variable globale de contrôle? différence avec chThdExits? Que doit contenir msg ?=====================================================================================================
-					}
-			}
-
-			chThdSleepUntilWindowed(time, time + MS2ST(100));
+				//arreter le robot s'il est plus proche que WALL_STOP_DIST d'un mur
+				if(wall_distance<WALL_STOP_DIST){
+					left_motor_set_speed(SPEED_0);
+					right_motor_set_speed(SPEED_0);
+					junction_scan();
+				}
 		}
+
+		chThdSleepUntilWindowed(time, time + MS2ST(100));
 	}
 }
 

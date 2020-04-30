@@ -9,6 +9,7 @@
 #include "motors.h"
 #include "control.h"
 #include "stdbool.h"
+#include "leds.h"
 
 #define WALL_THRESHOLD 	100
 #define SPEED_0			0
@@ -28,9 +29,6 @@ static THD_FUNCTION(proximity_scan, arg){
 	proximity_msg_t prox_values;
 
 	int16_t leftSpeed = 0, rightSpeed = 0;
-
-	msg_t msg=0; //TODO check if used correctly to end thread
-
 
 	while(1) {
 		time = chVTGetSystemTime();
@@ -60,6 +58,18 @@ void init_IR_thread(void){
 	chThdCreateStatic(proximity_scan_wa, sizeof(proximity_scan_wa), NORMALPRIO, proximity_scan, NULL);
 }
 
+void maze_end_check(void){
+	unsigned int front_scan_var=0;
+	unsigned int lateral_scan_var=0;
+
+	front_scan_var=abs(get_calibrated_prox(0)-get_calibrated_prox(7));
+	lateral_scan_var=abs(get_calibrated_prox(1)-get_calibrated_prox(6));
+
+	if(abs(front_scan_var-lateral_scan_var)<30){
+		set_rgb_led(0, 10, 0, 0);
+	}
+}
+
 void junction_scan(void){
 	unsigned int left=0;
 	unsigned int right=0;
@@ -77,6 +87,7 @@ void junction_scan(void){
 		turn_left();
 	}
 	else if(left>WALL_THRESHOLD && right>WALL_THRESHOLD){
+		maze_end_check();
 		dead_end();
 	}
 }
