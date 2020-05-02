@@ -24,6 +24,8 @@ void set_pause(void);
 
 void set_play(void);
 
+bool pause_state(void);
+
 #ifdef __cplusplus
 }
 #endif

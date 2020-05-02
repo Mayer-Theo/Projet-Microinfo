@@ -6,25 +6,24 @@
 #include "chprintf.h"
 #include "hal.h"
 #include "shell.h"
-
 #include "audio/microphone.h"
-#include "sensors/imu.h"
-#include "sensors/mpu9250.h"
 #include "sensors/VL53L0X/VL53L0X.h"
 #include "i2c_bus.h"
-#include "ir_remote.h"
 #include "leds.h"
 #include "main.h"
 #include "memory_protection.h"
 #include <motors.h>
 #include "sdio.h"
-#include "selector.h"
 #include "spi_comm.h"
 #include "usbcfg.h"
 #include "communication.h"
 #include "uc_usage.h"
 #include "sensors/proximity.h"
+#include "audio/play_melody.h"
+#include "audio/play_sound_file.h"
+#include "audio/audio_thread.h"
 
+//nos librairies
 #include "control.h"
 
 #define SHELL_WA_SIZE   THD_WORKING_AREA_SIZE(2048)
@@ -53,9 +52,6 @@ static void serial_start(void)
 	sdStart(&SD3, &ser_cfg); // UART3.
 }
 
-static messagebus_topic_t *prox_topic = NULL;
-static proximity_msg_t proximity_values;
-
 int main(void)
 {
     halInit();
@@ -72,13 +68,15 @@ int main(void)
 	usb_start();
 	motors_init();
 	proximity_start();
-	imu_start();
-	ir_remote_start();
 	spi_comm_start();
 	VL53L0X_start();
 	serial_start();
-	//mic_start(NULL);
 	sdio_start();
+	playMelodyStart();
+	playSoundFileStart();
+	dac_start();
+
+
 
 	//lancement du programme
 	init_threads();

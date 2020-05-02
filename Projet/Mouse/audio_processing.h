@@ -19,10 +19,13 @@ typedef enum {
 
 typedef enum{
 	WAIT_COMMAND = 0,
+	COMMAND_180DEG,
 	COMMAND_PAUSE,
 	COMMAND_PLAY,
 	COMMAND_TURN_LEFT,
 	COMMAND_TURN_RIGHT,
+	COMMAND_FASTER,
+	COMMAND_SLOWER,
 } Commandstate;
 
 void processAudioData(int16_t *data, uint16_t num_samples);

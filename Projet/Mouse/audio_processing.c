@@ -30,21 +30,31 @@ static float micBack_output[FFT_SIZE];
 
 #define MIN_VALUE_THRESHOLD	35000
 
-#define MIN_FREQ			10	//we don't analyze before this index to not use resources for nothing
-#define FREQ_PAUSE		16	//250Hz
-#define FREQ_LEFT			19	//296Hz
-#define FREQ_RIGHT			23	//359HZ
-#define FREQ_PLAY	26	//406Hz
-#define MAX_FREQ			30	//we don't analyze after this index to not use resources for nothing
+#define MIN_FREQ	10	//we don't analyze before this index to not use resources for nothing
+#define FREQ_180DEG	12	//188Hz
+#define FREQ_PAUSE	14	//219Hz
+#define FREQ_LEFT	16	//250Hz
+#define FREQ_RIGHT	18	//281Hz
+#define FREQ_PLAY	20	//312Hz
+#define	FREQ_FASTER	22	//344Hz
+#define FREQ_SLOWER	24	//375Hz
+#define MAX_FREQ	30	//we don't analyze after this index to not use resources for nothing
 
+#define FREQ_180DEG_L	(FREQ_180DEG-1)
+#define FREQ_180DEG_H	(FREQ_180DEG+1)
 #define FREQ_PAUSE_L	(FREQ_PAUSE-1)
 #define FREQ_PAUSE_H	(FREQ_PAUSE+1)
-#define FREQ_LEFT_L			(FREQ_LEFT-1)
-#define FREQ_LEFT_H			(FREQ_LEFT+1)
-#define FREQ_RIGHT_L		(FREQ_RIGHT-1)
-#define FREQ_RIGHT_H		(FREQ_RIGHT+1)
-#define FREQ_PLAY_L	(FREQ_PLAY-1)
-#define FREQ_PLAY_H	(FREQ_PLAY+1)
+#define FREQ_LEFT_L		(FREQ_LEFT-1)
+#define FREQ_LEFT_H		(FREQ_LEFT+1)
+#define FREQ_RIGHT_L	(FREQ_RIGHT-1)
+#define FREQ_RIGHT_H	(FREQ_RIGHT+1)
+#define FREQ_PLAY_L		(FREQ_PLAY-1)
+#define FREQ_PLAY_H		(FREQ_PLAY+1)
+#define FREQ_FASTER_L (FREQ_FASTER-1)
+#define FREQ_FASTER_H (FREQ_FASTER+1)
+#define FREQ_SLOWER_L (FREQ_SLOWER-1)
+#define FREQ_SLOWER_H (FREQ_SLOWER+1)
+
 
 #define SEND_FROM_MIC
 
@@ -81,8 +91,10 @@ void sound_remote(float* data){
 
 	switch(status){
 	case WAIT_COMMAND:
-		chprintf((BaseSequentialStream *)&SD3, "wait command\r\n");
-			if(max_norm_index >= FREQ_PAUSE_L && max_norm_index <= FREQ_PAUSE_H){
+			if(max_norm_index >= FREQ_180DEG_L && max_norm_index <= FREQ_180DEG_H){
+				status=COMMAND_180DEG;
+			}
+			else if(max_norm_index >= FREQ_PAUSE_L && max_norm_index <= FREQ_PAUSE_H){
 				status=COMMAND_PAUSE;
 			}
 			else if(max_norm_index >= FREQ_LEFT_L && max_norm_index <= FREQ_LEFT_H){
@@ -94,29 +106,50 @@ void sound_remote(float* data){
 			else if(max_norm_index >= FREQ_PLAY_L && max_norm_index <= FREQ_PLAY_H){
 				status=COMMAND_PLAY;
 			}
+			else if(max_norm_index >= FREQ_FASTER_L && max_norm_index <= FREQ_FASTER_H){
+				status=COMMAND_FASTER;
+			}
+			else if(max_norm_index >= FREQ_SLOWER_L && max_norm_index <= FREQ_SLOWER_H){
+				status=COMMAND_SLOWER;
+			}
 			break;
 
+	case COMMAND_180DEG:
+		turn_left();
+		turn_left();
+		set_play();
+		status=WAIT_COMMAND;
+		break;
+
 	case COMMAND_PAUSE:
-		chprintf((BaseSequentialStream *)&SD3, "command pause\r\n");
 		set_pause();
 		status=WAIT_COMMAND;
 		break;
 
 	case COMMAND_TURN_LEFT:
-		chprintf((BaseSequentialStream *)&SD3, "turn left init\r\n");
 		turn_left();
+		set_play();
 		status=WAIT_COMMAND;
 		break;
 
 	case COMMAND_TURN_RIGHT:
-		chprintf((BaseSequentialStream *)&SD3, "turn right init\r\n");
 		turn_right();
+		set_play();
 		status=WAIT_COMMAND;
 		break;
 
 	case COMMAND_PLAY:
-		chprintf((BaseSequentialStream *)&SD3, "change speed\r\n");
 		set_play();
+		status=WAIT_COMMAND;
+		break;
+
+	case COMMAND_FASTER:
+		faster();
+		status=WAIT_COMMAND;
+		break;
+
+	case COMMAND_SLOWER:
+		slower();
 		status=WAIT_COMMAND;
 		break;
 	}

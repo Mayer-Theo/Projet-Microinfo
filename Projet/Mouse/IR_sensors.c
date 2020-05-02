@@ -10,11 +10,15 @@
 #include "control.h"
 #include "stdbool.h"
 #include "leds.h"
+#include "tof.h"
+#include "sensors/VL53L0X/VL53L0X.h"
+#include"audio/play_melody.h"
 
 #define WALL_THRESHOLD 	100
 #define SPEED_0			0
 #define TRUE			1
 #define FALSE			0
+static bool inside_maze = FALSE;
 
 int speed=MOTOR_SPEED_LIMIT-200;
 
@@ -36,13 +40,30 @@ static THD_FUNCTION(proximity_scan, arg){
 		if(pause_state()==FALSE){
 			messagebus_topic_wait(prox_topic, &prox_values, sizeof(prox_values));
 
-			//autopilote seulement si dans un couloir
+			//autopilote seulement si pas d'obstacle
 			if(tof_wall_too_close()==FALSE){
-				chprintf((BaseSequentialStream *)&SD3, "autopilote\r\n");
 				leftSpeed = speed - prox_values.delta[0]*2 - prox_values.delta[1];
 				rightSpeed = speed - prox_values.delta[7]*2 - prox_values.delta[6];
 				right_motor_set_speed(rightSpeed);
 				left_motor_set_speed(leftSpeed);
+
+				if(prox_values.delta[2]<WALL_THRESHOLD && prox_values.delta[5]<WALL_THRESHOLD && inside_maze==TRUE){
+					inside_maze = FALSE;
+					stopCurrentMelody();
+					set_pause();
+					set_rgb_led(0, 10, 0, 0);
+					set_rgb_led(1, 10, 0, 0);
+					set_rgb_led(2, 10, 0, 0);
+					set_rgb_led(3, 10, 0, 0);
+					end_game_animation();
+				}
+				else if(prox_values.delta[2]>WALL_THRESHOLD && prox_values.delta[5]>WALL_THRESHOLD){
+					inside_maze = TRUE;
+					set_rgb_led(0, 0, 0, 0);
+					set_rgb_led(1, 0, 0, 0);
+					set_rgb_led(2, 0, 0, 0);
+					set_rgb_led(3, 0, 0, 0);
+				}
 			}
 		}
 		else if(pause_state()==TRUE){
@@ -58,21 +79,11 @@ void init_IR_thread(void){
 	chThdCreateStatic(proximity_scan_wa, sizeof(proximity_scan_wa), NORMALPRIO, proximity_scan, NULL);
 }
 
-void maze_end_check(void){
-	unsigned int front_scan_var=0;
-	unsigned int lateral_scan_var=0;
-
-	front_scan_var=abs(get_calibrated_prox(0)-get_calibrated_prox(7));
-	lateral_scan_var=abs(get_calibrated_prox(1)-get_calibrated_prox(6));
-
-	if(abs(front_scan_var-lateral_scan_var)<30){
-		set_rgb_led(0, 10, 0, 0);
-	}
-}
-
 void junction_scan(void){
 	unsigned int left=0;
 	unsigned int right=0;
+
+	stopCurrentMelody();
 
 	left=get_calibrated_prox(5);
 	right=get_calibrated_prox(2);
@@ -87,20 +98,31 @@ void junction_scan(void){
 		turn_left();
 	}
 	else if(left>WALL_THRESHOLD && right>WALL_THRESHOLD){
-		maze_end_check();
 		dead_end();
 	}
 }
 
-void change_speed(void){//TODO completer
-	static int speed_modifier=0;
-	static int counter=0;
+void slower(void){//TODO completer
+	speed=500;
 
-	counter++;
-	speed_modifier=200*counter;
-	speed=MOTOR_SPEED_LIMIT-speed_modifier;
+}
 
-	if(counter==4){
-		counter=0;
+void faster(void){//TODO completer
+	speed=MOTOR_SPEED_LIMIT;
+}
+
+void end_game_animation(void){
+	int i=0;
+	bool toggle_led=FALSE;
+
+	for(i=0; i<17; i++){
+		set_body_led(toggle_led);
+		toggle_led=!toggle_led;
+
+		chThdSleepMilliseconds(125);
 	}
+}
+
+bool maze_state(void){
+	return inside_maze;
 }

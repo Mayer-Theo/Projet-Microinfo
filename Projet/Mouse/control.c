@@ -11,6 +11,7 @@
 #include "tof.h"
 #include "IR_sensors.h"
 #include "audio_processing.h"
+#include"audio/play_melody.h"
 
 #define PI                  3.1415926536f
 #define WHEEL_DISTANCE      5.35f    //cm
@@ -26,10 +27,24 @@
 
 static bool pause_flag=FALSE;
 
+void set_pause(void){
+	pause_flag=TRUE;
+}
+
+void set_play(void){
+	pause_flag=FALSE;
+}
+
 void init_threads(void){
+	set_pause();
+	set_rgb_led(0, 10, 0, 0);
+	set_rgb_led(1, 10, 0, 0);
+	set_rgb_led(2, 10, 0, 0);
+	set_rgb_led(3, 10, 0, 0);
+
+	init_tof_thread();		//lance thread du tof
 	init_IR_thread();		//lance thread des capteurs IR
-	init_tof_thread();	//lance thread du tof
-    //init_sound_thread();	//lance thread d'analyse du son
+    init_sound_thread();	//lance thread d'analyse du son
 }
 
 void turn(float position, int sense){
@@ -60,8 +75,8 @@ void turn(float position, int sense){
 }
 
 void user_direction_input(void){
+	playMelody(WALKING, ML_SIMPLE_PLAY, NULL);
 	set_pause();
-	//TODO ask user for direction
 }
 
 void turn_left(void){
@@ -73,16 +88,7 @@ void turn_right(void){
 }
 
 void dead_end(void){
-	//TODO dead end...  then what?
 	turn(TURN_180DEG, TURN_RIGHT);
-}
-
-void set_pause(void){
-	pause_flag=TRUE;
-}
-
-void set_play(void){
-	pause_flag=FALSE;
 }
 
 bool pause_state(void){

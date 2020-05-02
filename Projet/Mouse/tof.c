@@ -19,8 +19,8 @@
 #define TRUE				1
 #define FALSE				0
 
-static bool wall_close=FALSE;
-int speed2=MOTOR_SPEED_LIMIT-200;
+static 	bool wall_close=FALSE;
+int 	speed2=MOTOR_SPEED_LIMIT-200;
 
 static THD_WORKING_AREA(tof_sensor_wa, 2048);
 static THD_FUNCTION(tof_sensor, arg){
@@ -35,7 +35,9 @@ static THD_FUNCTION(tof_sensor, arg){
 	while(1){
 		wall_distance=VL53L0X_get_dist_mm();
 
-		wall_close=FALSE;
+		if(pause_state()==FALSE && wall_distance>MAX_TOF_VALUE){
+			wall_close=FALSE;
+		}
 
 		//lancement du contrôle de distance uniquement dans une plage de valeurs et pas en pause
 		if(pause_state()==FALSE && wall_distance>MIN_TOF_VALUE && wall_distance<MAX_TOF_VALUE){
@@ -55,6 +57,7 @@ static THD_FUNCTION(tof_sensor, arg){
 				if(wall_distance<WALL_STOP_DIST){
 					left_motor_set_speed(SPEED_0);
 					right_motor_set_speed(SPEED_0);
+
 					junction_scan();
 				}
 		}
