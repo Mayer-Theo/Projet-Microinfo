@@ -2,25 +2,23 @@
 #include <string.h>
 #include "stdbool.h"
 #include "ch.h"
-#include "chprintf.h"
 #include "hal.h"
-#include "tof.h"
-#include <main.h>
 #include "sensors/VL53L0X/VL53L0X.h"
 #include "motors.h"
-#include "IR_sensors.h"
+
+#include "tof.h"
+#include <main.h>
 #include "control.h"
 
 #define WALL_STOP_DIST 		60
 #define SPEED_0				0
-#define ABERRATION_CONTROL	120
-#define MIN_TOF_VALUE		30
-#define MAX_TOF_VALUE		150
+#define ABERRATION_CONTROL	80
+#define MIN_TOF_VALUE		20
+#define MAX_TOF_VALUE		100
 #define TRUE				1
 #define FALSE				0
 
 static 	bool wall_close=FALSE;
-int 	speed2=MOTOR_SPEED_LIMIT-200;
 
 static THD_WORKING_AREA(tof_sensor_wa, 2048);
 static THD_FUNCTION(tof_sensor, arg){
@@ -41,8 +39,8 @@ static THD_FUNCTION(tof_sensor, arg){
 
 		//lancement du contrôle de distance uniquement dans une plage de valeurs et pas en pause
 		if(pause_state()==FALSE && wall_distance>MIN_TOF_VALUE && wall_distance<MAX_TOF_VALUE){
-			right_motor_set_speed(speed2);
-			left_motor_set_speed(speed2);
+			right_motor_set_speed(speed_value());
+			left_motor_set_speed(speed_value());
 
 			wall_close=TRUE;
 

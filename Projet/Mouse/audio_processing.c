@@ -2,17 +2,12 @@
 #include "hal.h"
 #include <main.h>
 #include <usbcfg.h>
-#include <chprintf.h>
-
-#include <motors.h>
 #include <audio/microphone.h>
 #include <audio_processing.h>
-#include <communications.h>
 #include <fft.h>
 #include <arm_math.h>
 
 #include "control.h"
-#include "IR_sensors.h"
 
 //semaphore
 static BSEMAPHORE_DECL(sendToComputer_sem, TRUE);
@@ -65,8 +60,6 @@ static THD_FUNCTION(listening, arg){
 	(void) arg;
 	chRegSetThreadName(__FUNCTION__);
 
-	systime_t time;
-
 	while(1){
 		mic_start(&processAudioData);
 	}
@@ -115,40 +108,48 @@ void sound_remote(float* data){
 			break;
 
 	case COMMAND_180DEG:
+		stopCurrentMelody();
 		turn_left();
 		turn_left();
-		set_play();
+		set_pause(FALSE);
 		status=WAIT_COMMAND;
 		break;
 
 	case COMMAND_PAUSE:
-		set_pause();
+		stopCurrentMelody();
+		set_pause(TRUE);
 		status=WAIT_COMMAND;
 		break;
 
 	case COMMAND_TURN_LEFT:
+		stopCurrentMelody();
 		turn_left();
-		set_play();
+		set_pause(FALSE);
 		status=WAIT_COMMAND;
 		break;
 
 	case COMMAND_TURN_RIGHT:
+		stopCurrentMelody();
 		turn_right();
-		set_play();
+		set_pause(FALSE);
 		status=WAIT_COMMAND;
 		break;
 
 	case COMMAND_PLAY:
-		set_play();
+		stopCurrentMelody();
+		set_ignore_junction(TRUE);
+		set_pause(FALSE);
 		status=WAIT_COMMAND;
 		break;
 
 	case COMMAND_FASTER:
+		stopCurrentMelody();
 		faster();
 		status=WAIT_COMMAND;
 		break;
 
 	case COMMAND_SLOWER:
+		stopCurrentMelody();
 		slower();
 		status=WAIT_COMMAND;
 		break;

@@ -9,17 +9,11 @@ extern "C" {
 
 void init_IR_thread(void);
 
-void junction_scan(void);
-
-void change_speed(void);
-
-void faster(void);
-
-void slower(void);
-
-void end_game_animation(void);
-
 bool maze_state(void);
+
+void set_ignore_junction(bool value);
+
+bool ignore_junction_value(void);
 
 #ifdef __cplusplus
 }

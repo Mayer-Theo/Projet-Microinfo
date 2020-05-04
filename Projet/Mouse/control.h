@@ -20,11 +20,23 @@ void dead_end(void);
 
 void turn(float position, int sense);
 
-void set_pause(void);
-
-void set_play(void);
+void set_pause(bool);
 
 bool pause_state(void);
+
+void slower(void);
+
+void faster(void);
+
+void end_game_animation(void);
+
+int speed_value(void);
+
+void junction_scan(void);
+
+void no_maze_led_indicator(int intensity);
+
+void advance(float position, int sense);
 
 #ifdef __cplusplus
 }

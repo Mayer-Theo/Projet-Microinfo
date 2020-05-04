@@ -3,7 +3,6 @@
 #include <string.h>
 #include <math.h>
 #include "ch.h"
-#include "chprintf.h"
 #include "hal.h"
 #include "shell.h"
 #include "audio/microphone.h"
@@ -16,7 +15,6 @@
 #include "sdio.h"
 #include "spi_comm.h"
 #include "usbcfg.h"
-#include "communication.h"
 #include "uc_usage.h"
 #include "sensors/proximity.h"
 #include "audio/play_melody.h"
@@ -75,8 +73,6 @@ int main(void)
 	playMelodyStart();
 	playSoundFileStart();
 	dac_start();
-
-
 
 	//lancement du programme
 	init_threads();
