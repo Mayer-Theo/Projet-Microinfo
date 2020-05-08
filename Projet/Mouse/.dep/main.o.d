@@ -77,7 +77,6 @@ build/obj/main.o: main.c \
  ../../lib/e-puck2_main-processor/ChibiOS//os/rt/include/chdynamic.h \
  ../../lib/e-puck2_main-processor/ChibiOS//os/rt/include/chqueues.h \
  ../../lib/e-puck2_main-processor/ChibiOS//os/rt/include/chstreams.h \
- ../../lib/e-puck2_main-processor/ChibiOS//os/hal/lib/streams/chprintf.h \
  ../../lib/e-puck2_main-processor/ChibiOS//os/hal/include/hal.h \
  ../../lib/e-puck2_main-processor/ChibiOS//os/hal/osal/rt/osal.h \
  ../../lib/e-puck2_main-processor/src/halconf.h \
@@ -134,30 +133,8 @@ build/obj/main.o: main.c \
  ../../lib/e-puck2_main-processor/ChibiOS//os/hal/include/mmc_spi.h \
  ../../lib/e-puck2_main-processor/ChibiOS//os/hal/include/serial_usb.h \
  ../../lib/e-puck2_main-processor/ChibiOS//os/various/shell.h \
- ../../lib/e-puck2_main-processor/src/aseba_vm/aseba_node.h \
- ../../lib/e-puck2_main-processor/aseba/common/types.h \
- ../../lib/e-puck2_main-processor/aseba/vm/vm.h \
- ../../lib/e-puck2_main-processor/aseba/vm/../common/types.h \
- ../../lib/e-puck2_main-processor/src/parameter/parameter.h \
- ../../lib/e-puck2_main-processor/src/aseba_vm/skel_user.h \
- ../../lib/e-puck2_main-processor/aseba/vm/natives.h \
- ../../lib/e-puck2_main-processor/aseba/vm/vm.h \
- ../../lib/e-puck2_main-processor/src/sensors/imu.h \
- ../../lib/e-puck2_main-processor/src/sensors/mpu9250.h \
- ../../lib/e-puck2_main-processor/src/sensors/mpu9250_registers.h \
- ../../lib/e-puck2_main-processor/src/leds.h \
- ../../lib/e-puck2_main-processor/src/aseba_vm/aseba_can_interface.h \
- ../../lib/e-puck2_main-processor/src/aseba_vm/aseba_bridge.h \
- ../../lib/e-puck2_main-processor/src/audio/audio_thread.h \
- ../../lib/e-puck2_main-processor/src/audio/play_melody.h \
- ../../lib/e-puck2_main-processor/src/audio/play_sound_file.h \
  ../../lib/e-puck2_main-processor/src/audio/microphone.h \
  ../../lib/e-puck2_main-processor/src/audio/mp45dt02_processing.h \
- ../../lib/e-puck2_main-processor/src/camera/po8030.h \
- ../../lib/e-puck2_main-processor/src/epuck1x/Asercom.h \
- ../../lib/e-puck2_main-processor/src/epuck1x/Asercom2.h \
- ../../lib/e-puck2_main-processor/src/epuck1x/a_d/advance_ad_scan/e_acc.h \
- ../../lib/e-puck2_main-processor/src/sensors/battery_level.h \
  ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/VL53L0X.h \
  ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/vl53l0x_api.h \
  ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/vl53l0x_api_strings.h \
@@ -168,31 +145,22 @@ build/obj/main.o: main.c \
  f:\documents\github\projet-microinfo\lib\e-puck2_main-processor\src\sensors\vl53l0x\api\core\inc\vl53l0x_def.h \
  ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/../../platform/inc/vl53l0x_platform_log.h \
  ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/../../platform/inc/vl53l0x_i2c_platform.h \
- ../../lib/e-puck2_main-processor/src/cmd.h \
- ../../lib/e-puck2_main-processor/src/config_flash_storage.h \
- ../../lib/e-puck2_main-processor/src/parameter/parameter.h \
- ../../lib/e-puck2_main-processor/src/exti.h \
  ../../lib/e-puck2_main-processor/src/i2c_bus.h \
- ../../lib/e-puck2_main-processor/src/ir_remote.h main.h \
- ../../lib/e-puck2_main-processor/src/camera/dcmi_camera.h \
- ../../lib/e-puck2_main-processor/ChibiOS_ext/os/hal/include/dcmi.h \
- ../../lib/e-puck2_main-processor/ChibiOS_ext/os/hal/include/../ports/STM32/STM32F4xx/dcmi_lld.h \
- ../../lib/e-puck2_main-processor/ChibiOS_ext/os/hal/include/../ports/STM32/STM32F4xx/stm32_registry.h \
- ../../lib/e-puck2_main-processor/ChibiOS_ext/os/hal/include/../ports/STM32/STM32F4xx/stm32_rcc.h \
- ../../lib/e-puck2_main-processor/src/camera/po8030.h \
+ ../../lib/e-puck2_main-processor/src/leds.h main.h \
  ../../lib/e-puck2_main-processor/src/msgbus/messagebus.h \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\unistd.h \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\unistd.h \
+ ../../lib/e-puck2_main-processor/src/parameter/parameter.h \
+ ../../lib/e-puck2_main-processor/src/sensors/proximity.h \
  ../../lib/e-puck2_main-processor/src/memory_protection.h \
  ../../lib/e-puck2_main-processor/src/motors.h \
  ../../lib/e-puck2_main-processor/src/sdio.h \
- ../../lib/e-puck2_main-processor/src/selector.h \
  ../../lib/e-puck2_main-processor/src/spi_comm.h \
  ../../lib/e-puck2_main-processor/src/usbcfg.h \
- ../../lib/e-puck2_main-processor/src/communication.h \
- ../../lib/e-puck2_main-processor/src/cmp_mem_access/cmp_mem_access.h \
- ../../lib/e-puck2_main-processor/src/cmp/cmp.h \
- ../../lib/e-puck2_main-processor/src/uc_usage.h proximity.h
+ ../../lib/e-puck2_main-processor/src/uc_usage.h \
+ ../../lib/e-puck2_main-processor/src/audio/play_melody.h \
+ ../../lib/e-puck2_main-processor/src/audio/play_sound_file.h \
+ ../../lib/e-puck2_main-processor/src/audio/audio_thread.h control.h
 
 d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\stdio.h:
 
@@ -350,8 +318,6 @@ d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-non
 
 ../../lib/e-puck2_main-processor/ChibiOS//os/rt/include/chstreams.h:
 
-../../lib/e-puck2_main-processor/ChibiOS//os/hal/lib/streams/chprintf.h:
-
 ../../lib/e-puck2_main-processor/ChibiOS//os/hal/include/hal.h:
 
 ../../lib/e-puck2_main-processor/ChibiOS//os/hal/osal/rt/osal.h:
@@ -464,53 +430,9 @@ d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-non
 
 ../../lib/e-puck2_main-processor/ChibiOS//os/various/shell.h:
 
-../../lib/e-puck2_main-processor/src/aseba_vm/aseba_node.h:
-
-../../lib/e-puck2_main-processor/aseba/common/types.h:
-
-../../lib/e-puck2_main-processor/aseba/vm/vm.h:
-
-../../lib/e-puck2_main-processor/aseba/vm/../common/types.h:
-
-../../lib/e-puck2_main-processor/src/parameter/parameter.h:
-
-../../lib/e-puck2_main-processor/src/aseba_vm/skel_user.h:
-
-../../lib/e-puck2_main-processor/aseba/vm/natives.h:
-
-../../lib/e-puck2_main-processor/aseba/vm/vm.h:
-
-../../lib/e-puck2_main-processor/src/sensors/imu.h:
-
-../../lib/e-puck2_main-processor/src/sensors/mpu9250.h:
-
-../../lib/e-puck2_main-processor/src/sensors/mpu9250_registers.h:
-
-../../lib/e-puck2_main-processor/src/leds.h:
-
-../../lib/e-puck2_main-processor/src/aseba_vm/aseba_can_interface.h:
-
-../../lib/e-puck2_main-processor/src/aseba_vm/aseba_bridge.h:
-
-../../lib/e-puck2_main-processor/src/audio/audio_thread.h:
-
-../../lib/e-puck2_main-processor/src/audio/play_melody.h:
-
-../../lib/e-puck2_main-processor/src/audio/play_sound_file.h:
-
 ../../lib/e-puck2_main-processor/src/audio/microphone.h:
 
 ../../lib/e-puck2_main-processor/src/audio/mp45dt02_processing.h:
-
-../../lib/e-puck2_main-processor/src/camera/po8030.h:
-
-../../lib/e-puck2_main-processor/src/epuck1x/Asercom.h:
-
-../../lib/e-puck2_main-processor/src/epuck1x/Asercom2.h:
-
-../../lib/e-puck2_main-processor/src/epuck1x/a_d/advance_ad_scan/e_acc.h:
-
-../../lib/e-puck2_main-processor/src/sensors/battery_level.h:
 
 ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/VL53L0X.h:
 
@@ -532,31 +454,11 @@ f:\documents\github\projet-microinfo\lib\e-puck2_main-processor\src\sensors\vl53
 
 ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/../../platform/inc/vl53l0x_i2c_platform.h:
 
-../../lib/e-puck2_main-processor/src/cmd.h:
-
-../../lib/e-puck2_main-processor/src/config_flash_storage.h:
-
-../../lib/e-puck2_main-processor/src/parameter/parameter.h:
-
-../../lib/e-puck2_main-processor/src/exti.h:
-
 ../../lib/e-puck2_main-processor/src/i2c_bus.h:
 
-../../lib/e-puck2_main-processor/src/ir_remote.h:
+../../lib/e-puck2_main-processor/src/leds.h:
 
 main.h:
-
-../../lib/e-puck2_main-processor/src/camera/dcmi_camera.h:
-
-../../lib/e-puck2_main-processor/ChibiOS_ext/os/hal/include/dcmi.h:
-
-../../lib/e-puck2_main-processor/ChibiOS_ext/os/hal/include/../ports/STM32/STM32F4xx/dcmi_lld.h:
-
-../../lib/e-puck2_main-processor/ChibiOS_ext/os/hal/include/../ports/STM32/STM32F4xx/stm32_registry.h:
-
-../../lib/e-puck2_main-processor/ChibiOS_ext/os/hal/include/../ports/STM32/STM32F4xx/stm32_rcc.h:
-
-../../lib/e-puck2_main-processor/src/camera/po8030.h:
 
 ../../lib/e-puck2_main-processor/src/msgbus/messagebus.h:
 
@@ -564,24 +466,26 @@ d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-non
 
 d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\unistd.h:
 
+../../lib/e-puck2_main-processor/src/parameter/parameter.h:
+
+../../lib/e-puck2_main-processor/src/sensors/proximity.h:
+
 ../../lib/e-puck2_main-processor/src/memory_protection.h:
 
 ../../lib/e-puck2_main-processor/src/motors.h:
 
 ../../lib/e-puck2_main-processor/src/sdio.h:
 
-../../lib/e-puck2_main-processor/src/selector.h:
-
 ../../lib/e-puck2_main-processor/src/spi_comm.h:
 
 ../../lib/e-puck2_main-processor/src/usbcfg.h:
 
-../../lib/e-puck2_main-processor/src/communication.h:
-
-../../lib/e-puck2_main-processor/src/cmp_mem_access/cmp_mem_access.h:
-
-../../lib/e-puck2_main-processor/src/cmp/cmp.h:
-
 ../../lib/e-puck2_main-processor/src/uc_usage.h:
 
-proximity.h:
+../../lib/e-puck2_main-processor/src/audio/play_melody.h:
+
+../../lib/e-puck2_main-processor/src/audio/play_sound_file.h:
+
+../../lib/e-puck2_main-processor/src/audio/audio_thread.h:
+
+control.h:

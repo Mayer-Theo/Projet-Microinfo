@@ -155,11 +155,11 @@ build/obj/cmd.o: ../../lib/e-puck2_main-processor/src/cmd.c \
  ../../lib/e-puck2_main-processor/src/config_flash_storage.h \
  ../../lib/e-puck2_main-processor/src/parameter/parameter.h \
  ../../lib/e-puck2_main-processor/src/leds.h main.h \
- ../../lib/e-puck2_main-processor/src/camera/dcmi_camera.h \
  ../../lib/e-puck2_main-processor/src/msgbus/messagebus.h \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\unistd.h \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\unistd.h \
  ../../lib/e-puck2_main-processor/src/parameter/parameter.h \
+ ../../lib/e-puck2_main-processor/src/sensors/proximity.h \
  ../../lib/e-puck2_main-processor/src/motors.h \
  ../../lib/e-puck2_main-processor/src/fat.h \
  ../../lib/e-puck2_main-processor/ChibiOS_ext//ext/fatfs/src/ff.h \
@@ -482,8 +482,6 @@ d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-non
 
 main.h:
 
-../../lib/e-puck2_main-processor/src/camera/dcmi_camera.h:
-
 ../../lib/e-puck2_main-processor/src/msgbus/messagebus.h:
 
 d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\unistd.h:
@@ -491,6 +489,8 @@ d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-non
 d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\unistd.h:
 
 ../../lib/e-puck2_main-processor/src/parameter/parameter.h:
+
+../../lib/e-puck2_main-processor/src/sensors/proximity.h:
 
 ../../lib/e-puck2_main-processor/src/motors.h:
 

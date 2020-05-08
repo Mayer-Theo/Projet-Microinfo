@@ -154,14 +154,9 @@ build/obj/communication.o: \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\lib\gcc\arm-none-eabi\7.2.1\include\stdarg.h \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\stdio.h \
  ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/../../platform/inc/vl53l0x_i2c_platform.h \
- main.h ../../lib/e-puck2_main-processor/src/camera/dcmi_camera.h \
- ../../lib/e-puck2_main-processor/ChibiOS_ext/os/hal/include/dcmi.h \
- ../../lib/e-puck2_main-processor/ChibiOS_ext/os/hal/include/../ports/STM32/STM32F4xx/dcmi_lld.h \
- ../../lib/e-puck2_main-processor/ChibiOS_ext/os/hal/include/../ports/STM32/STM32F4xx/stm32_registry.h \
- ../../lib/e-puck2_main-processor/ChibiOS_ext/os/hal/include/../ports/STM32/STM32F4xx/stm32_rcc.h \
- ../../lib/e-puck2_main-processor/src/camera/po8030.h \
- ../../lib/e-puck2_main-processor/src/msgbus/messagebus.h \
- ../../lib/e-puck2_main-processor/src/parameter/parameter.h
+ main.h ../../lib/e-puck2_main-processor/src/msgbus/messagebus.h \
+ ../../lib/e-puck2_main-processor/src/parameter/parameter.h \
+ ../../lib/e-puck2_main-processor/src/sensors/proximity.h
 
 ../../lib/e-puck2_main-processor/ChibiOS//os/hal/include/hal.h:
 
@@ -473,18 +468,8 @@ d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-non
 
 main.h:
 
-../../lib/e-puck2_main-processor/src/camera/dcmi_camera.h:
-
-../../lib/e-puck2_main-processor/ChibiOS_ext/os/hal/include/dcmi.h:
-
-../../lib/e-puck2_main-processor/ChibiOS_ext/os/hal/include/../ports/STM32/STM32F4xx/dcmi_lld.h:
-
-../../lib/e-puck2_main-processor/ChibiOS_ext/os/hal/include/../ports/STM32/STM32F4xx/stm32_registry.h:
-
-../../lib/e-puck2_main-processor/ChibiOS_ext/os/hal/include/../ports/STM32/STM32F4xx/stm32_rcc.h:
-
-../../lib/e-puck2_main-processor/src/camera/po8030.h:
-
 ../../lib/e-puck2_main-processor/src/msgbus/messagebus.h:
 
 ../../lib/e-puck2_main-processor/src/parameter/parameter.h:
+
+../../lib/e-puck2_main-processor/src/sensors/proximity.h:
