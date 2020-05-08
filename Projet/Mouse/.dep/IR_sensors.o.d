@@ -141,8 +141,9 @@ build/obj/IR_sensors.o: IR_sensors.c \
  ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/../../platform/inc/vl53l0x_platform_log.h \
  ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/../../platform/inc/vl53l0x_i2c_platform.h \
  ../../lib/e-puck2_main-processor/src/motors.h \
- ../../lib/e-puck2_main-processor/src/audio/play_melody.h main.h \
- ../../lib/e-puck2_main-processor/src/msgbus/messagebus.h \
+ ../../lib/e-puck2_main-processor/src/audio/play_melody.h \
+ ../../lib/e-puck2_main-processor/ChibiOS//os/hal/lib/streams/chprintf.h \
+ main.h ../../lib/e-puck2_main-processor/src/msgbus/messagebus.h \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\unistd.h \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\unistd.h \
  ../../lib/e-puck2_main-processor/src/parameter/parameter.h \
@@ -436,6 +437,8 @@ f:\documents\github\projet-microinfo\lib\e-puck2_main-processor\src\sensors\vl53
 ../../lib/e-puck2_main-processor/src/motors.h:
 
 ../../lib/e-puck2_main-processor/src/audio/play_melody.h:
+
+../../lib/e-puck2_main-processor/ChibiOS//os/hal/lib/streams/chprintf.h:
 
 main.h:
 

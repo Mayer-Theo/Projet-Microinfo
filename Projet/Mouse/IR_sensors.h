@@ -9,12 +9,6 @@ extern "C" {
 
 void init_IR_thread(void);
 
-bool maze_state(void);
-
-void set_ignore_junction(bool value);
-
-bool ignore_junction_value(void);
-
 #ifdef __cplusplus
 }
 #endif

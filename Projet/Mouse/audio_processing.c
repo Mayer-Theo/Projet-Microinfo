@@ -4,6 +4,7 @@
 #include <usbcfg.h>
 #include <audio/microphone.h>
 #include <audio_processing.h>
+#include <audio/play_melody.h>
 #include <fft.h>
 #include <arm_math.h>
 
@@ -50,18 +51,22 @@ static float micBack_output[FFT_SIZE];
 #define FREQ_SLOWER_L (FREQ_SLOWER-1)
 #define FREQ_SLOWER_H (FREQ_SLOWER+1)
 
-
-#define SEND_FROM_MIC
+#define TURN_LEFT			-1	//permet de modifier le sens de rotation des moteurs pour tourner dans le bon sens
+#define TURN_RIGHT			1	//idem que pour TURN_LEFT
+#define SLOW_SPEED			400
+#define FAST_SPEED			800
 
 static Commandstate status=WAIT_COMMAND;
 
-static THD_WORKING_AREA(listening_wa, 2048);
-static THD_FUNCTION(listening, arg){
+static THD_WORKING_AREA(Mic_thread_wa, 1024);
+static THD_FUNCTION(Mic_thread, arg){
 	(void) arg;
 	chRegSetThreadName(__FUNCTION__);
+	systime_t time;
 
 	while(1){
 		mic_start(&processAudioData);
+		chThdSleepUntilWindowed(time, time + MS2ST(100)); // Refresh @ 10 Hz.
 	}
 
 }
@@ -82,6 +87,7 @@ void sound_remote(float* data){
 		}
 	}
 
+	//Switch permettant d'effectuer les actions nécessaires selon la commande
 	switch(status){
 	case WAIT_COMMAND:
 			if(max_norm_index >= FREQ_180DEG_L && max_norm_index <= FREQ_180DEG_H){
@@ -109,8 +115,7 @@ void sound_remote(float* data){
 
 	case COMMAND_180DEG:
 		stopCurrentMelody();
-		turn_left();
-		turn_left();
+		dead_end();
 		set_pause(FALSE);
 		status=WAIT_COMMAND;
 		break;
@@ -123,38 +128,37 @@ void sound_remote(float* data){
 
 	case COMMAND_TURN_LEFT:
 		stopCurrentMelody();
-		turn_left();
+		right_angle_turn(TURN_LEFT);
 		set_pause(FALSE);
 		status=WAIT_COMMAND;
 		break;
 
 	case COMMAND_TURN_RIGHT:
 		stopCurrentMelody();
-		turn_right();
+		right_angle_turn(TURN_RIGHT);
 		set_pause(FALSE);
 		status=WAIT_COMMAND;
 		break;
 
 	case COMMAND_PLAY:
 		stopCurrentMelody();
-		set_ignore_junction(TRUE);
 		set_pause(FALSE);
+		set_ignore_junction(TRUE);
 		status=WAIT_COMMAND;
 		break;
 
 	case COMMAND_FASTER:
 		stopCurrentMelody();
-		faster();
+		change_speed(FAST_SPEED);
 		status=WAIT_COMMAND;
 		break;
 
 	case COMMAND_SLOWER:
 		stopCurrentMelody();
-		slower();
+		change_speed(SLOW_SPEED);
 		status=WAIT_COMMAND;
 		break;
 	}
-
 }
 
 /*
@@ -240,41 +244,8 @@ void processAudioData(int16_t *data, uint16_t num_samples){
 	}
 }
 
-void wait_send_to_computer(void){
-	chBSemWait(&sendToComputer_sem);
-}
-
-float* get_audio_buffer_ptr(BUFFER_NAME_t name){
-	if(name == LEFT_CMPLX_INPUT){
-		return micLeft_cmplx_input;
-	}
-	else if (name == RIGHT_CMPLX_INPUT){
-		return micRight_cmplx_input;
-	}
-	else if (name == FRONT_CMPLX_INPUT){
-		return micFront_cmplx_input;
-	}
-	else if (name == BACK_CMPLX_INPUT){
-		return micBack_cmplx_input;
-	}
-	else if (name == LEFT_OUTPUT){
-		return micLeft_output;
-	}
-	else if (name == RIGHT_OUTPUT){
-		return micRight_output;
-	}
-	else if (name == FRONT_OUTPUT){
-		return micFront_output;
-	}
-	else if (name == BACK_OUTPUT){
-		return micBack_output;
-	}
-	else{
-		return NULL;
-	}
-}
-
 //--------------------------------------------Nos Fonctions----------------------------------//
+//Permet de lancer la thread audio
 void init_sound_thread(void){
-	chThdCreateStatic(listening_wa, sizeof(listening_wa), NORMALPRIO, listening, NULL);
+	chThdCreateStatic(Mic_thread_wa, sizeof(Mic_thread_wa), NORMALPRIO, Mic_thread, NULL);
 }
