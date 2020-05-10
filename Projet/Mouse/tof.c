@@ -66,7 +66,7 @@ void init_tof_thread(void){
 	chThdCreateStatic(tof_thread_wa, sizeof(tof_thread_wa), NORMALPRIO, tof_thread, NULL);
 }
 
-//ppermet de savoir si il y a un mur proche ou pas
+//ppermet de savoir s'il y a un mur proche ou pas
 bool tof_wall_too_close(void){
 	return wall_close;
 }

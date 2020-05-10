@@ -1,9 +1,9 @@
 build/obj/vl53l0x_i2c_platform.o: \
  ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/platform/src/vl53l0x_i2c_platform.c \
  ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/platform/src/../inc/vl53l0x_i2c_platform.h \
- ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/platform/src/../inc/../../core/inc/vl53l0x_def.h \
- ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/platform/src/../inc/../../core/inc/vl53l0x_device.h \
- ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/platform/src/../inc/../../core/inc/vl53l0x_types.h \
+ c:\users\théo\desktop\test\lib\e-puck2_main-processor\src\sensors\vl53l0x\api\core\inc\vl53l0x_def.h \
+ c:\users\théo\desktop\test\lib\e-puck2_main-processor\src\sensors\vl53l0x\api\core\inc\vl53l0x_device.h \
+ c:\users\théo\desktop\test\lib\e-puck2_main-processor\src\sensors\vl53l0x\api\core\inc\vl53l0x_types.h \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\lib\gcc\arm-none-eabi\7.2.1\include\stdint.h \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\stdint.h \
  d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\_default_types.h \
@@ -111,11 +111,11 @@ build/obj/vl53l0x_i2c_platform.o: \
 
 ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/platform/src/../inc/vl53l0x_i2c_platform.h:
 
-../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/platform/src/../inc/../../core/inc/vl53l0x_def.h:
+c:\users\théo\desktop\test\lib\e-puck2_main-processor\src\sensors\vl53l0x\api\core\inc\vl53l0x_def.h:
 
-../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/platform/src/../inc/../../core/inc/vl53l0x_device.h:
+c:\users\théo\desktop\test\lib\e-puck2_main-processor\src\sensors\vl53l0x\api\core\inc\vl53l0x_device.h:
 
-../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/platform/src/../inc/../../core/inc/vl53l0x_types.h:
+c:\users\théo\desktop\test\lib\e-puck2_main-processor\src\sensors\vl53l0x\api\core\inc\vl53l0x_types.h:
 
 d:\downloads\eclipse_e-puck2_win32_29_jan_2020\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\lib\gcc\arm-none-eabi\7.2.1\include\stdint.h:
 

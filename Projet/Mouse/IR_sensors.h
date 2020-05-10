@@ -7,6 +7,9 @@ extern "C" {
 
 #include <stdint.h>
 
+/**
+* @brief   Lance la thread des capteurs IR
+*/
 void init_IR_thread(void);
 
 #ifdef __cplusplus

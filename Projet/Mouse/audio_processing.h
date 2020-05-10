@@ -28,8 +28,12 @@ typedef enum{
 	COMMAND_SLOWER,
 } Commandstate;
 
+
 void processAudioData(int16_t *data, uint16_t num_samples);
 
+/**
+* @brief   Lance la thread des microphones
+*/
 void init_sound_thread(void);
 
 #endif /* AUDIO_PROCESSING_H */
